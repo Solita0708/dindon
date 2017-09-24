@@ -18,20 +18,15 @@ postdata = urllib.parse.urlencode({
     'username':'@@@',
     'password':'@@@',
     'result':g,
-    'submit':'µn¤J'
+    'submit':'ÂµnÂ¤J'
         }).encode("utf-8")
 
 loginUrl = 'https://dinbendon.net/do/?wicket:interface=:1:signInPanel:signInForm::IFormSubmitListener'
-result = BeautifulSoup(opener.open(loginUrl, postdata), "html5lib")
+soup2 = BeautifulSoup(opener.open(loginUrl, postdata), "html5lib")
 
 cookie.save(ignore_discard=True, ignore_expires=True)
 
-
-
-
-
-
-table = result.find_all('table')[3]
+table = soup2.find_all('table')[3]
 td1 = table.find_all('td')[0:-1]
 for i in td1:
     span1 = i.find_all('span')
