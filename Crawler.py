@@ -4,8 +4,8 @@ import re
 from bs4 import BeautifulSoup
 import http.cookiejar
 
-filename = 'cookie.txt'
-cookie = http.cookiejar.MozillaCookieJar(filename)
+
+cookie = http.cookiejar.MozillaCookieJar()
 opener = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(cookie))
 soup = BeautifulSoup(opener.open('https://dinbendon.net/do'), "html5lib")
 
@@ -24,7 +24,6 @@ postdata = urllib.parse.urlencode({
 loginUrl = 'https://dinbendon.net/do/?wicket:interface=:1:signInPanel:signInForm::IFormSubmitListener'
 soup2 = BeautifulSoup(opener.open(loginUrl, postdata), "html5lib")
 
-cookie.save(ignore_discard=True, ignore_expires=True)
 
 table = soup2.find_all('table')[3]
 td1 = table.find_all('td')[0:-1]
